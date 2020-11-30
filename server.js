@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 const mockUserData = [
-  { name: 'Mark' },
-  { name: 'Jill' }
+  { name: 'Mark', age: 26 },
+  { name: 'Jill', age: 30 }
 ]
 app.get('/users', function (req, res) {
   res.json({
@@ -17,10 +17,21 @@ app.get('/users', function (req, res) {
 })
 
 app.get('/users/:id', function (req, res) {
+  console.log(req.params.id)
   res.json({
     success: true,
-    message: 'successfully got users. Nice!',
-    users: mockUserData
+    message: 'got one user',
+    user: req.params.id
+  })
+})
+
+app.get('/users/:id/:age', function (req, res) {
+  console.log(req.params.id + "\n" + req.params.age)
+  res.json({
+    success: true,
+    message: 'got one user',
+    name: req.params.id,
+    age: req.params.age
   })
 })
 app.post('/login', function (req, res) {
